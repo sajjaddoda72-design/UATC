@@ -1,0 +1,10 @@
+pycache/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+*.pt
+*.pth
+*.bin
+downloads/
+artifacts/
