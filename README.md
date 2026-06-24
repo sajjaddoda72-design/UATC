@@ -1,4 +1,4 @@
-# UATC: A Closed-Loop Controller for Resource-Efficient and Stable Edge Fine-Tuning of Large Language Models
+# UATC: Universal Adaptive Training Controller
 
 ---
 
