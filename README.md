@@ -270,15 +270,9 @@ The descent from step-1 loss 0.113 to step-300 loss 0.795 is not a worsening tre
 
 This is why we report pruning rate as a first-class metric in §5.2 rather than as an afterthought: a high pruning rate is a *positive* indicator of selective learning, not a regression in training quality.
 
-### 5.6 Reproducibility
 
-The behavioral claim — zero OOM crashes and graceful shock recovery — is fully reproducible across Colab T4 sessions. Two design decisions guarantee this:
 
-1. **Tactical memory reservation.** A startup routine allocates a background tensor that brings total VRAM consumption to 11.5 GB exactly, regardless of how much memory the Colab VM allocator happens to give the session. The starting pressure is therefore identical across runs.
-
-2. **Closed-loop invariance.** Unlike a static rule-based system, UATC does not depend on a particular noise profile. The Kalman filter absorbs session-to-session variations in baseline allocator noise (typically ±50–150 MB across Colab VMs of different CUDA driver versions), and the PID setpoint recalibrates against the smoothed pressure on the first step. A different T4 may exhibit slightly different absolute step losses or slightly different shock-recovery step counts, but the qualitative behavior — zero OOM, pruning rate in the 50–58% band, successful shock recovery — is invariant.
-
-### 5.7 Ablation Study: Contribution of Each Subsystem
+### 5.6 Ablation Study: Contribution of Each Subsystem
 
 To confirm that every subsystem contributes a distinct capability, we ran four 300-step experiments on the same hardware, dataset, and stress profile as §5.1. Each run disables exactly one subsystem while leaving the others fully active. The full-controller run (all subsystems ON) is included as a control.
 
@@ -294,7 +288,7 @@ Three findings follow. First, **disabling the Kalman filter** does not break the
 
 The static DeepSpeed-style baseline, which uses the *strongest hand-tuned configuration* we could assemble without an adaptive controller, fails on the same first shock that UATC absorbs. This confirms that the contribution is not the specific choice of knobs (checkpointing, cache flush, conservative batch) but the presence of a *feedback loop* capable of reacting within the same training step.
 
-### 5.8 Overhead, Failure Modes, and Honest Limitations
+### 5.7 Overhead, Failure Modes, and Honest Limitations
 
 **Controller overhead.** The full controller loop (Kalman update, PID step, Smith correction, Schmitt evaluation, phase-machine update, pruner query) runs in under one millisecond per step on the T4 host CPU. The 135.03 s total wall-clock time for the 300-step run includes this overhead; UATC still finishes faster than the DeepSpeed-style baseline (159.35 s) because the dynamic pruning removes 905 redundant sample-passes that the baseline computes to completion. The controller is therefore *net-positive* on wall-clock time, not merely neutral.
 
