@@ -559,28 +559,6 @@ The controller's paradigm-aware architecture is designed to extend without archi
 
 ---
 
-## Appendix: Empirical Telemetry Summary
-
-| Step | Loss | VRAM | BS (from→to) | Pruned | Phase / Event |
-|---:|---:|---:|---|---:|---|
-| 1   | 6.921 | 8.59 GB (59.0%) | 8 → 4   | 1/8   | WARMUP |
-| 11  | 3.135 | 8.81 GB (60.5%) | 4 → 4   | 3/4   | SCALING (WARMUP→SCALING) |
-| 25  | —     | spike | — | — | Context shock (1024 tokens injected) |
-| 100 | 5.336 | 8.81 GB (60.5%) | 4 → 4   | 0/4   | CONVERGENCE (shock resolved) |
-| 250 | 5.000 | 8.81 GB (60.5%) | 48 → 18 | 3/48  | RECOVERY (batch shock intercepted) |
-| 250 | 2.979 | 8.81 GB (60.5%) | 18 → 6  | 3/18  | RECOVERY (iterative reduction) |
-| 250 | 2.979 | 8.81 GB (60.5%) | 6 → 4   | 5/6   | RECOVERY (resolved) |
-| 500 | 2.905 | 8.81 GB (60.5%) | 4 → 4   | 2/4   | CONVERGENCE (final) |
-
-Baseline run (static, BS=16, LR=1.8e-4, no controller, 11.5 GB background tensor released):
-
-| Step | Loss | VRAM | BS | Status |
-|---:|---:|---:|---|---|
-| 1   | 5.058 | 1.53 GB (10.5%) | 16 | NORMAL |
-| 25  | 5.662 | 2.24 GB (15.4%) | 16 | NORMAL (1024-token shock survived) |
-| 50  | 5.000 | 2.24 GB (15.4%) | 48 | COLLAPSE (OOM) |
-
----
 
 ## Appendix B: Frequently Asked Questions
 
