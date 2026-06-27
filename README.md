@@ -144,7 +144,7 @@ D_k = (1 - \alpha_d) \cdot D_{k-1} + \alpha_d \cdot (-\hat{v}_k), \qquad \alpha_
 
 where $`\text{span} = \text{HardLimit} - \text{SoftLimit}`$ and $\xi$ is the paradigm elasticity from §3.7. The final gains multiply the base gains by $`\text{capacity\_scale} \cdot \{\text{gain}\}`$. The integral term uses *conditional integration* (anti-windup): when the PID output saturates against a clamp bound, the integrator is bled in the opposite direction by an amount proportional to $`(\text{unclamped} - \text{clamped}) \cdot \text{anti\_windup\_gain}`$ rather than being accumulated, preventing integral windup that would otherwise cause post-saturation overshoot.
 
-### 3.4 Delay Compensation (Smith Predictor)
+### 3.4 Delay Compensation (Simplified heuristic Smith predictor)
 
 Batch-size changes do not reflect in VRAM telemetry for several steps due to kernel launch latency and asynchronous allocator commits. The Smith predictor compensates by maintaining a FIFO buffer of the most recent PID outputs and adding a bounded correction term derived from the oldest buffered value and the current negative velocity:
 
