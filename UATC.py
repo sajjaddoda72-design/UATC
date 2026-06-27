@@ -292,7 +292,11 @@ class AdaptiveExpertController:
 
         self._cached_paradigm: str = "FPFT"
         self._cached_elasticity: float = 0.9
-
+    @property
+    def phase(self) -> str:
+        """Expose the current controller phase as a public read-only property."""
+        return self._phase
+        
     # ------------------------------------------------------------------
     # CUDA cache flush
     # ------------------------------------------------------------------
