@@ -383,7 +383,6 @@ For clean local integration, place the UATC.py file containing the UATC logic di
 ```text
 my_llm_project/
 ├── UATC.py               # The UATC Controller codebase
-├── train.py              # Your main training and orchestration script
 └── requirements.txt      # Project dependencies
 
 ```
