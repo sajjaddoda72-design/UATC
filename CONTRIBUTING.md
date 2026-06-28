@@ -20,7 +20,7 @@ If you encounter a CUDA Out-Of-Memory (OOM) crash that UATC failed to intercept,
 
 1. Navigate to the [GitHub Issues](https://github.com/sajjaddoda72-design/UATC/issues) page.
 2. Open a new issue and select the **Bug Report** template.
-3. Provide a minimal, reproducible code snippet (or a Google Colab link) alongside your specific hardware configuration (GPU model, total VRAM, and QLoRA/PEFT hyperparameters).
+3. Provide a minimal, reproducible code snippet (or a Google Colab link) alongside your specific hardware configuration (GPU model, total VRAM, and QLoRA/PEFT/FPFT hyperparameters).
 4. Include the exact error trace and the console logs printed prior to the failure.
 
 ### 2. Suggesting Enhancements
