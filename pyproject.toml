@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uatc"
+version = "1.0.0"
+description = "Universal Adaptive Training Controller (UATC): Closed-loop VRAM regulation and dynamic data pruning for LLM fine-tuning."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Sajjad Doda", email = "sajjaddoda72@gmail.com" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Intended Audience :: Science/Research"
+]
+dependencies = [
+    "torch>=2.4.0",
+    "transformers>=4.40.0,<5.0.0",
+    "peft>=0.10.0",
+    "bitsandbytes>=0.43.0",
+    "accelerate>=0.30.0",
+    "datasets>=2.19.0",
+    "pypdf>=4.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0"
+]
+
+[tool.setuptools]
+py-modules = ["UATC"]
+
+[project.urls]
+"Homepage" = "https://github.com/sajjaddoda72-design/UATC"
+"Bug Tracker" = "https://github.com/sajjaddoda72-design/UATC/issues"
